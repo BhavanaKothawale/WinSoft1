@@ -1,0 +1,36 @@
+package winsoft;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class WordCount {
+    public static void main(String[] args) {
+        String sentence = "welcome to wensoft drive";
+        int wordCount = countWords(sentence);
+        System.out.println("Number of words in the sentence: " + wordCount);
+    }
+
+    public static int countWords(String sentence) {
+        sentence = sentence.trim();
+        
+       
+        String[] words = sentence.split("\\s+");
+
+        
+        Map<String, Integer> wordFrequencyMap = new HashMap<>();
+
+       
+        for (String word : words) {
+           
+            if (wordFrequencyMap.containsKey(word)) {
+                wordFrequencyMap.put(word, wordFrequencyMap.get(word) + 1);
+            } else {
+                
+                wordFrequencyMap.put(word, 1);
+            }
+        }
+
+      
+        return wordFrequencyMap.size();
+    }
+}

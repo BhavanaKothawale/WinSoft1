@@ -1,0 +1,53 @@
+package winsoft;
+
+public class MaximumSumPath {
+    public static void main(String[] args) {
+        int[] X = {3, 6, 7, 8, 10, 12, 15, 18, 100};
+        int[] Y = {1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50};
+        System.out.println("Maximum sum path: " + findMaximumSumPath(X, Y));
+    }
+
+    public static int findMaximumSumPath(int[] X, int[] Y) {
+        int m = X.length;
+        int n = Y.length;
+
+        int currentSum = 0;
+        int maxSum = 0;
+
+        int i = 0, j = 0;
+
+        while (i < m && j < n) {
+           
+            if (X[i] == Y[j]) {
+                maxSum += Math.max(currentSum, X[i]);
+                currentSum = 0;
+                i++;
+                j++;
+            }
+           
+            else if (X[i] < Y[j]) {
+                currentSum += X[i];
+                i++;
+            }
+           
+            else {
+                currentSum += Y[j];
+                j++;
+            }
+        }
+
+        while (i < m) {
+            currentSum += X[i];
+            i++;
+        }
+
+        while (j < n) {
+            currentSum += Y[j];
+            j++;
+        }
+
+        maxSum += Math.max(currentSum, maxSum);
+
+        return maxSum;
+    }
+}

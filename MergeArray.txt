@@ -1,0 +1,50 @@
+package winsoft;
+
+import java.util.Arrays;
+
+public class MergeArray {
+    
+    public static void mergeArray(int[] X, int[] Y) {
+        // Step 1: Move non-zero elements of X to the end
+        int m = X.length;
+        int n = Y.length;
+        int k = m - 1;
+        for (int i = m - 1; i >= 0; i--) {
+            if (X[i] != 0) {
+                X[k] = X[i];
+                k--;
+            }
+        }
+        
+        // Step 2: Merge X and Y
+        int i = k + 1; // Pointer for X
+        int j = 0;     // Pointer for Y
+        int l = 0;     // Pointer for merged array
+        while (i < m && j < n) {
+            if (X[i] < Y[j]) {
+                X[l] = X[i];
+                i++;
+            } else {
+                X[l] = Y[j];
+                j++;
+            }
+            l++;
+        }
+        
+        // Step 3: Copy remaining elements from Y
+        while (j < n) {
+            X[l] = Y[j];
+            j++;
+            l++;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] X = {0, 2, 0, 3, 0, 5, 6, 0, 0};
+        int[] Y = {1, 8, 9, 10, 15};
+        
+        mergeArray(X, Y);
+        
+        System.out.println(Arrays.toString(X));
+    }
+}
